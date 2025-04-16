@@ -1,0 +1,33 @@
+{
+  "config": {
+    "title": "Dansk Trafikstatus",
+    "step": {
+      "user": {
+        "title": "Opsæt Dansk Trafikstatus",
+        "description": "Opsæt overvågning af danske tog- og metrolinjer",
+        "data": {
+          "name": "Navn",
+          "scan_interval": "Opdateringsinterval (minutter)",
+          "train_lines": "Toglinjer der skal overvåges (kommasepareret)",
+          "metro_lines": "Metrolinjer der skal overvåges (kommasepareret)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Denne integration er allerede konfigureret"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Dansk Trafikstatus Indstillinger",
+        "description": "Opdater dine Dansk Trafikstatus indstillinger",
+        "data": {
+          "scan_interval": "Opdateringsinterval (minutter)",
+          "train_lines": "Toglinjer der skal overvåges (kommasepareret)",
+          "metro_lines": "Metrolinjer der skal overvåges (kommasepareret)"
+        }
+      }
+    }
+  }
+}

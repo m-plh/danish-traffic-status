@@ -1,0 +1,73 @@
+# Example Lovelace dashboard for Danish Traffic Status
+# Copy this to your Lovelace dashboard configuration
+
+title: Public Transport
+icon: mdi:train
+path: public-transport
+cards:
+  - type: entities
+    title: Train Status
+    icon: mdi:train
+    entities:
+      - entity: sensor.train_line_c_status
+        name: Line C
+        secondary_info: last-changed
+    state_color: true
+    show_header_toggle: false
+
+  - type: entities
+    title: Metro Status
+    icon: mdi:subway
+    entities:
+      - entity: sensor.metro_line_m1_m2_status
+        name: Lines M1/M2
+        secondary_info: last-changed
+    state_color: true
+    show_header_toggle: false
+
+  - type: markdown
+    title: Train Line C Details
+    content: >
+      {% if states('sensor.train_line_c_status') == 'disruption' %}
+        ## Disruption on Line C
+        
+        {{ state_attr('sensor.train_line_c_status', 'message') }}
+        
+        {% if state_attr('sensor.train_line_c_status', 'url') %}
+          [More information]({{ state_attr('sensor.train_line_c_status', 'url') }})
+        {% endif %}
+        
+        {% if state_attr('sensor.train_line_c_status', 'urgent') %}
+          **This is an urgent message**
+        {% endif %}
+      {% else %}
+        ## Line C is operating normally
+        
+        No disruptions reported.
+      {% endif %}
+      
+      Last updated: {{ state_attr('sensor.train_line_c_status', 'last_updated') }}
+
+  - type: markdown
+    title: Metro Lines M1/M2 Details
+    content: >
+      {% if states('sensor.metro_line_m1_m2_status') == 'disruption' %}
+        ## Disruption on Metro Lines M1/M2
+        
+        {{ state_attr('sensor.metro_line_m1_m2_status', 'status') }}
+        
+        Type: {{ state_attr('sensor.metro_line_m1_m2_status', 'message') }}
+      {% else %}
+        ## Metro Lines M1/M2 are operating normally
+        
+        No disruptions reported.
+      {% endif %}
+      
+      Last updated: {{ state_attr('sensor.metro_line_m1_m2_status', 'last_updated') }}
+
+  - type: button
+    name: Check Traffic Status Now
+    icon: mdi:refresh
+    tap_action:
+      action: call-service
+      service: script.check_traffic_status

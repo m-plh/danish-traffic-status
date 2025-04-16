@@ -1,0 +1,10 @@
+{
+  "domain": "danish_traffic_status",
+  "name": "Danish Traffic Status",
+  "documentation": "https://github.com/yourusername/danish_traffic_status",
+  "dependencies": [],
+  "codeowners": ["@yourusername"],
+  "requirements": ["requests"],
+  "iot_class": "cloud_polling",
+  "version": "0.1.0"
+}

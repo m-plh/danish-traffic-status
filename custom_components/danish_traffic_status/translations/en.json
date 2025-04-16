@@ -1,0 +1,33 @@
+{
+  "config": {
+    "title": "Danish Traffic Status",
+    "step": {
+      "user": {
+        "title": "Set up Danish Traffic Status",
+        "description": "Set up monitoring for Danish train and metro lines",
+        "data": {
+          "name": "Name",
+          "scan_interval": "Update interval (minutes)",
+          "train_lines": "Train lines to monitor (comma-separated)",
+          "metro_lines": "Metro lines to monitor (comma-separated)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This integration is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Danish Traffic Status Options",
+        "description": "Update your Danish Traffic Status settings",
+        "data": {
+          "scan_interval": "Update interval (minutes)",
+          "train_lines": "Train lines to monitor (comma-separated)",
+          "metro_lines": "Metro lines to monitor (comma-separated)"
+        }
+      }
+    }
+  }
+}

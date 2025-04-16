@@ -1,0 +1,7 @@
+{
+  "name": "Danish Traffic Status",
+  "render_readme": true,
+  "domains": ["sensor"],
+  "homeassistant": "2021.12.0",
+  "iot_class": "cloud_polling"
+}
