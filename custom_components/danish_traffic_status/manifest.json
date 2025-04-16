@@ -1,9 +1,9 @@
 {
   "domain": "danish_traffic_status",
   "name": "Danish Traffic Status",
-  "documentation": "https://github.com/yourusername/danish_traffic_status",
+  "documentation": "https://github.com/m-plh/danish_traffic_status",
   "dependencies": [],
-  "codeowners": ["@yourusername"],
+  "codeowners": ["@m-plh"],
   "requirements": ["requests"],
   "iot_class": "cloud_polling",
   "version": "0.1.0"
