@@ -21,6 +21,7 @@ class TrainStatusService:
             
             train_status_messages = response.json()
             
+            _LOGGER.debug("Train status messages: %s", train_status_messages)
             # Filter active messages for the specified line
             active_messages = [
                 msg for msg in train_status_messages
@@ -97,7 +98,7 @@ class MetroStatusService:
             response.raise_for_status()
             
             metro_status = response.json()
-            
+            _LOGGER.debug("Metro status messages: %s", metro_status)
             # Find active message for the specified line
             active_messages = metro_status.get("activeMessages", [])
             for message in active_messages:

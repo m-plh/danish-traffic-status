@@ -101,6 +101,7 @@ class TrainStatusSensor(TrafficStatusSensor):
 
     def _has_disruption(self, status_data):
         """Check if there is a disruption based on train status data."""
+        # Return False (no disruption) if status_data is empty or lacks disruption info
         return bool(status_data.get("body") and status_data.get("url"))
 
     def _get_attributes(self, status_data):
@@ -128,6 +129,7 @@ class MetroStatusSensor(TrafficStatusSensor):
 
     def _has_disruption(self, status_data):
         """Check if there is a disruption based on metro status data."""
+        # Return False (no disruption) if status_data is empty or lacks disruption info
         return bool(status_data.get("name") and not status_data.get("isClearMessage", False))
 
     def _get_attributes(self, status_data):

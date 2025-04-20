@@ -5,51 +5,50 @@
 
 # Example automation to send a notification when train line C has a disruption
 automation:
-  - alias: "Train Line C Disruption"
-    trigger:
-      platform: state
-      entity_id: sensor.train_line_c_status
-      to: "disruption"
-    action:
-      - service: notify.mobile_app
-        data:
-          title: "Train Line C Disruption"
-          message: "{{ state_attr('sensor.train_line_c_status', 'message') }}"
-          data:
-            url: "{{ state_attr('sensor.train_line_c_status', 'url') }}"
-
-  - alias: "Metro Line M1/M2 Disruption"
-    trigger:
-      platform: state
-      entity_id: sensor.metro_line_m1_m2_status
-      to: "disruption"
-    action:
-      - service: notify.mobile_app
-        data:
-          title: "Metro Line M1/M2 Disruption"
-          message: "{{ state_attr('sensor.metro_line_m1_m2_status', 'status') }}"
+- alias: "Train Line C Disruption"
+  triggers:
+    entity_id: sensor.train_line_c_status
+    to: "disruption"
+  actions:
+    action: notify.mobile_app
+    data:
+      title: "Train Line C Disruption"
+      message: "{{ state_attr('sensor.train_line_c_status', 'message') }}"
+      #url: "{{ state_attr('sensor.train_line_c_status', 'url') }}"
+- alias: "Metro Line M1/M2 Disruption"
+  triggers:
+    entity_id: sensor.metro_line_m1_m2_status
+    to: "disruption"
+  actions:
+    action: notify.mobile_app
+    data:
+      title: "Metro Line M1/M2 Disruption"
+      message: "{{ state_attr('sensor.metro_line_m1_m2_status', 'status') }}"
 
 # Example Lovelace UI card to display train and metro status
 # Add this to your Lovelace dashboard
-# entities:
-#   - entity: sensor.train_line_c_status
-#     name: Train Line C
-#     icon: mdi:train
-#   - entity: sensor.metro_line_m1_m2_status
-#     name: Metro Line M1/M2
-#     icon: mdi:subway
-# show_header_toggle: false
-# title: Public Transport Status
-# type: entities
+name: traffic_status
+entities:
+  sensor.train_line_c_status:
+    name: Train Line C
+    icon: mdi:train
+  sensor.metro_line_m1_m2_status:
+    name: Metro Line M1/M2
+    icon: mdi:subway
+  show_header_toggle: false
+  title: Public Transport Status
 
 # Example script to check all traffic status on demand
 script:
   check_traffic_status:
     alias: "Check Traffic Status"
-    sequence:
-      - service: homeassistant.update_entity
-        target:
-          entity_id: sensor.train_line_c_status
-      - service: homeassistant.update_entity
-        target:
-          entity_id: sensor.metro_line_m1_m2_status
+  sequence:
+    - alias: "Update Line C"
+      action: homeassistant.update_entity
+      target:
+        entity_id: sensor.train_line_c_status
+    - alias: "Update M1/M2"
+      action: homeassistant.update_entity
+      target:
+        entity_id: sensor.metro_line_m1_m2_status
+
